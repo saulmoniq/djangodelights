@@ -29,23 +29,11 @@ class RecipeRequirement(models.Model):
 
     def __str__(self):
         return str(self.menuItem) + " | " + " Quantity " + str(self.quantity) +" Ingredient: " + str(self.ingredient)
-
-    # def __purchase__(self):
-    #     if self.quantity <= self.Ingredient.quantity:
-    #         Revisar esto, para poder modificar la BD de Ingredientes.
-    #          Ingredient.objects.filter(pk=self.ingredient_id).update(quantity=F('quantity')+1)
-    #          Ingredient.save()
-    #             Movie.objects.filter(pk=self.movie_id).update( stock=F('stock')+1)
-    #             https://docs.djangoproject.com/en/4.1/ref/models/expressions/
-    #     else:
-    #          self.ingredient.quantity += self.quantity
-             
+          
 
 class purchased (models.Model):
     hour = models.DateTimeField(default="")
     recipeRequirement = models.ForeignKey(RecipeRequirement, null=True, on_delete=models.CASCADE)
     
-    # def __str__(self):
-    #     return str(self.hour) + " | " + " Item acquired: " + str(self.recipeRequirement)
-    #     return self.__purchase__()
-
+    def __str__(self):
+        return str(self.hour) + " | " + " Item acquired: " + str(self.recipeRequirement)

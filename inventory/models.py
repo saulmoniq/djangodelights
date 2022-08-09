@@ -21,6 +21,9 @@ class menuItem(models.Model):
     def __str__(self):
         return self.name + " Price: " + str(self.price)
 
+    def get_absolute_url(self):
+         return "/home/"
+
 
 class RecipeRequirement(models.Model):
     quantity = models.FloatField(default=0)

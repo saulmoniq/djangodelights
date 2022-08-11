@@ -7,3 +7,7 @@ class menuItemCreateForm(forms.ModelForm):
         model = menuItem
         fields = "__all__"
 
+class ingredientsCreateForm(forms.ModelForm):
+    class Meta:
+        model = Ingredient
+        fields = "__all__"

@@ -14,6 +14,9 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name + " | " + " Qty available: " + str(self.quantity) + " Price/unit: " + str(self.price) + " Unit: " + self.unit
 
+    def get_absolute_url(self):
+        return "/"
+
 class menuItem(models.Model):
     name = models.CharField(max_length=20)
     price = models.FloatField(default=0)
@@ -22,7 +25,7 @@ class menuItem(models.Model):
         return self.name + " Price: " + str(self.price)
 
     def get_absolute_url(self):
-         return "/home/"
+         return "/"
 
 
 class RecipeRequirement(models.Model):

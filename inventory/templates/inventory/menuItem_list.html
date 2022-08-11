@@ -7,35 +7,24 @@
 {% endblock %}
 
 {% block content %}
-<h2> Estos son todos los ingredientes disponibles actualmente:</h2>
+<h2> Estos son todos los Platos disponibles actualmente:</h2>
 <table class="line-table">
     <thead>
       <tr>
         <th>Name</th>
-        <th>Quantity</th>
         <th>Price</th>
-        <th>Unit</th>
       </tr>
     </thead>
     <tbody>
     {% for key in object_list %}
       <tr>
         <td>
-           <li>{{ key.name }}</li>
+            <!-- #Esto va encerrado en un anchor -->
+          {{ key.name }}
         </td>
-        <td>
-            <li>{{ key.quantity }}</li>
-        </td> 
         <td>
             <li>{{ key.price }}</li>
         </td> 
-        <td>
-            <li>{{ key.unit }}</li>
-        </td> 
-        <td>
-          <a id= "xbutton" href="{% url 'deleteIngredient' key.id %}">X</a>
-      </td> 
-       
       </tr>
     {% endfor %}
     </tbody>

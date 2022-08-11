@@ -2,3 +2,13 @@
     font-size: 24px;
     color:aquamarine
 }
+
+#xbutton {
+    font-size: 20px;
+    color: red;
+}
+
+#xbutton:hover {
+    font-size: 22px;
+    transition: 0.1;
+}

@@ -21,7 +21,7 @@
     {% for key in object_list %}
       <tr>
         <td>
-           <li>{{ key.name }}</li>
+          <li><a href="{% url 'updateIngredient' key.id %}">{{ key.name }}</a></li>
         </td>
         <td>
             <li>{{ key.quantity }}</li>

@@ -7,28 +7,27 @@
 {% endblock %}
 
 {% block content %}
-<h2> Estos son todos los Platos disponibles actualmente:</h2>
+<h2> Estos son todas las compras registradas actualmente:</h2>
 <table class="line-table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Price</th>
+        <th>Hora</th>
+        <th>Ingredientes usados</th>
       </tr>
     </thead>
     <tbody>
     {% for key in object_list %}
       <tr>
         <td>
-          <a href="{% url 'updateMenuItem' key.id %}">{{ key.name }}</a>
+          <li>{{ key.hour }}</li>
         </td>
         <td>
-            <li>{{ key.price }}</li>
-        </td> 
+            <li><a href="{% url 'updatePurchased' key.id %}">{{ key.recipeRequirement }}</a></li>
+        </td>     
         <td>
-          <li><a href="{% url 'deleteMenuItem' key.id %}">X</a></li>
-      </td> 
+            <li><a href="{% url 'purchased_delete' key.id %}">X</a></li>
+        </td>    
       </tr>
-
     {% endfor %}
     </tbody>
   </table>

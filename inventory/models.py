@@ -25,7 +25,7 @@ class menuItem(models.Model):
         return self.name + " Price: " + str(self.price)
 
     def get_absolute_url(self):
-         return "/"
+         return "/menuitems-list"
 
 
 class RecipeRequirement(models.Model):
@@ -40,6 +40,10 @@ class RecipeRequirement(models.Model):
 class purchased (models.Model):
     hour = models.DateTimeField(default="")
     recipeRequirement = models.ForeignKey(RecipeRequirement, null=True, on_delete=models.CASCADE)
+    menuItem = models.ForeignKey(menuItem, null=True, on_delete=models.CASCADE)
     
     def __str__(self):
         return str(self.hour) + " | " + " Item acquired: " + str(self.recipeRequirement)
+
+    def get_absolute_url(self):
+        return "/listpurchased"

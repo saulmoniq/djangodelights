@@ -3,6 +3,7 @@ from codecs import charmap_build
 from tkinter import CASCADE
 from django.db import models
 import datetime
+
 # Create your models here.
 
 class Ingredient(models.Model):
@@ -12,7 +13,7 @@ class Ingredient(models.Model):
     unit = models.CharField(max_length=10, blank=True)
 
     def __str__(self):
-        return self.name + " | " + " Qty available: " + str(self.quantity) + " Price/unit: " + str(self.price) + " Unit: " + self.unit
+        return self.name + " | " + " Qty available: " + str(self.quantity) + " Price: " + str(self.price) + " Unit: " + self.unit
 
     def get_absolute_url(self):
         return "/"
@@ -41,9 +42,14 @@ class purchased (models.Model):
     hour = models.DateTimeField(default="")
     recipeRequirement = models.ForeignKey(RecipeRequirement, null=True, on_delete=models.CASCADE)
     menuItem = models.ForeignKey(menuItem, null=True, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return str(self.hour) + " | " + " Item acquired: " + str(self.recipeRequirement)
 
     def get_absolute_url(self):
         return "/listpurchased"
+
+    def get_Total(self):
+        revenue = self.menuItem.price - self.recipeRequirement.ingredient.price
+        return revenue
+

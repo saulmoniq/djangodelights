@@ -12,7 +12,8 @@
     <thead>
       <tr>
         <th>Hora</th>
-        <th>Ingredientes usados</th>
+        <th>Menu Item</th>
+        <th>Used ingredients</th>
       </tr>
     </thead>
     <tbody>
@@ -22,8 +23,14 @@
           <li>{{ key.hour }}</li>
         </td>
         <td>
-            <li><a href="{% url 'updatePurchased' key.id %}">{{ key.recipeRequirement }}</a></li>
+            <li><a href="{% url 'updatePurchased' key.id %}">{{ key.menuItem }}</a>
+              <p>Price of the menu {{ key.menuItem.price }} - Price of the ingredient {{ key.recipeRequirement.ingredient.price }}</p>
+              <p>Total revenue: {{ key.get_Total }}</p>
+            </li>
         </td>     
+        <td>
+          <li>{{ key.recipeRequirement.ingredient }}</li>
+      </td> 
         <td>
             <li><a href="{% url 'purchased_delete' key.id %}">X</a></li>
         </td>    

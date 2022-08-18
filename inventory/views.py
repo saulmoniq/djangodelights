@@ -1,14 +1,34 @@
+from http.client import HTTPResponse
 from traceback import format_exception_only
 from venv import create
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from .models import Ingredient, menuItem, purchased
+from .models import Ingredient, RecipeRequirement, menuItem, purchased
 from .forms import ingredientsCreateForm, menuItemCreateForm, purchasedCreateForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
-
-
+from django.contrib.auth import authenticate
+from django.shortcuts import redirect
+from django.http import HttpResponse
 # Create your views here.
+
+def login_view(request):
+  context = {
+    "login_view": "active"
+  }
+  if request.method == "POST":
+    username = request.POST["username"]
+    password = request.POST["password"]
+    # Add your code below:
+    
+    user = authenticate(request, username=username, password=password)
+
+    if user is not None:
+      return redirect("home")
+    else:
+      return HttpResponse("invalid credentials")
+  return render(request, "inventory/login.html", context)
+
 def home(request):
     return render(request, 'inventory/home.html')
 
@@ -69,3 +89,4 @@ class deletePurchased(DeleteView):
   model = purchased
   success_url = "/listpurchased"
   template_name = "inventory/delete_purchased.html"
+

@@ -10,6 +10,10 @@ from django.views.generic import ListView
 from django.contrib.auth import authenticate
 from django.shortcuts import redirect
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 def login_view(request):
@@ -29,14 +33,26 @@ def login_view(request):
       return HttpResponse("invalid credentials")
   return render(request, "inventory/login.html", context)
 
+def logout_request(request):
+  logout(request)
+  return redirect("home")
+
+
+
+class SignUp(CreateView):
+  form_class = UserCreationForm
+  success_url = reverse_lazy("login")
+  template_name = "inventory/signup.html"
+
+@login_required
 def home(request):
-    return render(request, 'inventory/home.html')
+    return render(request, 'home.html')
 
 class IngredientView(ListView):
   model = Ingredient
   template_name = "inventory/ingredients_list.html"
 
-class createIngredient(CreateView):
+class createIngredient(LoginRequiredMixin, CreateView):
   model = Ingredient
   form_class = ingredientsCreateForm
   template_name = "inventory/ingredients_create_form.html"
